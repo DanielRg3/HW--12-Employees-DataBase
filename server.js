@@ -11,10 +11,6 @@ const db = mysql.createConnection (
     console.log(`Connected to employees_db!!!`)
 );
 
-// We need to initialize the NPM with: $ npm init -y
-// We need to import the 'Inquirer' library with: $ npm i inquirer --save
-//for the tests we install npm i --save-dev jest
-
 let questions = [
     {
         type: "list",
@@ -23,13 +19,29 @@ let questions = [
         choices: [
             "All Departments",
             "All Roles",
+            "All Employees",
+            "Add a Department",
+            "Add a Role",
+            "Add and Employee",
+            "Update and Employee Role",
         ]
-    },]
+    },
+]
 
 inquirer.prompt(questions).then(function(response) {
     console.log(response);
     if(response.options == "All Departments") {
         db.query('SELECT * FROM department', function (err, results) {
+            console.log(results);
+        });
+    }
+    if(response.options == "All Roles") {
+        db.query('SELECT * FROM role', function (err, results) {
+            console.log(results);
+        });
+    }
+    if(response.options == "All Employees") {
+        db.query('SELECT * FROM employee', function (err, results) {
             console.log(results);
         });
     }
